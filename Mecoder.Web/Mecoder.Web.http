@@ -3,4 +3,12 @@
 GET {{Mecoder.Web_HostAddress}}/weatherforecast/
 Accept: application/json
 
+
 ###
+
+
+GET {{Mecoder.Web_HostAddress}}/api/quiz/1
+Accept: application/json
+
+###
+

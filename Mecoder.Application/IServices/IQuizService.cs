@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mecoder.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Mecoder.Application.IServices
 {
     public interface IQuizService
     {
+        QuizDTO GetQuiz(int id);
     }
 }
