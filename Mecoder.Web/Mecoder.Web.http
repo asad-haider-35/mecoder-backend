@@ -1,0 +1,6 @@
+@Mecoder.Web_HostAddress = http://localhost:5177
+
+GET {{Mecoder.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
