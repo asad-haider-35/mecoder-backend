@@ -9,6 +9,7 @@ namespace Mecoder.Application.IServices
 {
     public interface IQuizService
     {
+        string CalculateResult(QuizResponseDTO quizResponse);
         QuizDTO GetQuiz(int id);
     }
 }

@@ -8,9 +8,9 @@ namespace Mecoder.Application.DTOs
 {
     public class QuizQuestionResponseDTO
     {
-        public required int Id { get; set; }
-        public required int QuizResponseId { get; set; }
-        public required int QuestionId { get; set; }
+        public int Id { get; set; }
+        public int QuizResponseId { get; set; }
+        public int QuestionId { get; set; }
         public int ResponseId { get; set; }
         public int AquiredScore { get; set; }
     }

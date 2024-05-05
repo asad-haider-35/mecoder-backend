@@ -1,5 +1,6 @@
 ﻿using Mecoder.Application.Converters;
 using Mecoder.Application.DTOs;
+using Mecoder.Application.Enums;
 using Mecoder.Application.IServices;
 using Mecoder.Infrastructure.IRepositories;
 using Mecoder.Infrastructure.Models;
@@ -37,7 +38,7 @@ namespace Mecoder.Application.Services
 
                 return dto;
             }
-            catch (ApplicationException appEx)
+            catch (ApplicationException)
             {
                 throw;
             }
@@ -46,5 +47,37 @@ namespace Mecoder.Application.Services
                 throw;
             }
         }
+
+        public string CalculateResult(QuizResponseDTO quizResponse)
+        {
+            try
+            {
+                QuizDTO quiz = GetQuiz(quizResponse.QuizId);
+
+                var introvertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Introvert).ToList();
+                var ambivertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Ambivert).ToList();
+                var extrovertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Extrovert).ToList();
+
+                Dictionary<string, int> result = new Dictionary<string, int>()
+                {
+                    { "Introvert", introvertResponses.Count },
+                    { "Ambivert", ambivertResponses.Count },
+                    { "Extrovert", extrovertResponses.Count }
+                };
+
+                KeyValuePair<string, int> finalResult = result.OrderByDescending(x => x.Value).FirstOrDefault();
+
+                return finalResult.Key;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

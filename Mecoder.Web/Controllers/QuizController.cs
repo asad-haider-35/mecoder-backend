@@ -1,6 +1,8 @@
 ﻿using Mecoder.Application.DTOs;
 using Mecoder.Application.IServices;
 using Mecoder.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -56,5 +58,36 @@ namespace Mecoder.Web.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("CalculateResult")]
+        public IActionResult CalculateResult([FromBody] QuizResponseDTO quizResponse)
+        {
+            try
+            {
+                ResponseModel<string> response = new ResponseModel<string>();
+
+                response.Data = _quizService.CalculateResult(quizResponse);
+
+                response.StatusCode = HttpStatusCode.OK;
+                response.Message = "Quiz with specified ID fetched successfully";
+
+                return Ok(response);
+            }
+            catch (ApplicationException appEx)
+            {
+                ResponseModel<object> response = new ResponseModel<object>();
+
+                response.StatusCode = HttpStatusCode.BadRequest;
+                response.Message = appEx.Message;
+
+                return BadRequest(response);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    
     }
 }
