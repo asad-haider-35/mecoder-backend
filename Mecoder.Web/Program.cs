@@ -7,9 +7,22 @@ namespace Mecoder.Web
     {
         public static void Main(string[] args)
         {
+            var MyAllowSpecificOrigins = "MyAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+                {
+                    policy
+                        .WithOrigins("http://localhost:5173")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
 
             // Project Dependencies
             builder.Services.InjectInfrastructureLayer();
@@ -37,7 +50,7 @@ namespace Mecoder.Web
 
             app.UseAuthorization();
 
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.MapControllers();
 
             app.Run();
