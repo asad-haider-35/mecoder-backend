@@ -12,6 +12,6 @@ namespace Mecoder.Application.DTOs
         public int QuizResponseId { get; set; }
         public int QuestionId { get; set; }
         public int ResponseId { get; set; }
-        public int AquiredScore { get; set; }
+        public int AcquiredScore { get; set; }
     }
 }

@@ -54,9 +54,9 @@ namespace Mecoder.Application.Services
             {
                 QuizDTO quiz = GetQuiz(quizResponse.QuizId);
 
-                var introvertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Introvert).ToList();
-                var ambivertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Ambivert).ToList();
-                var extrovertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AquiredScore == (int)PersonalityCategoryScore.Extrovert).ToList();
+                var introvertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AcquiredScore == (int)PersonalityCategoryScore.Introvert).ToList();
+                var ambivertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AcquiredScore == (int)PersonalityCategoryScore.Ambivert).ToList();
+                var extrovertResponses = quizResponse.QuizQuestionResponses.Where(x => x.AcquiredScore == (int)PersonalityCategoryScore.Extrovert).ToList();
 
                 Dictionary<string, int> result = new Dictionary<string, int>()
                 {
