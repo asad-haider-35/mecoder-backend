@@ -60,14 +60,31 @@ namespace Mecoder.Application.Services
 
                 Dictionary<string, int> result = new Dictionary<string, int>()
                 {
-                    { "Introvert", introvertResponses.Count },
-                    { "Ambivert", ambivertResponses.Count },
-                    { "Extrovert", extrovertResponses.Count }
+                    { PersonalityCategoryScore.Introvert.ToString(), introvertResponses.Count },
+                    { PersonalityCategoryScore.Ambivert.ToString(), ambivertResponses.Count },
+                    { PersonalityCategoryScore.Extrovert.ToString(), extrovertResponses.Count }
                 };
 
-                KeyValuePair<string, int> finalResult = result.OrderByDescending(x => x.Value).FirstOrDefault();
+                string finalResult = string.Empty;
 
-                return finalResult.Key;
+                if (introvertResponses.Count == ambivertResponses.Count && introvertResponses.Count > extrovertResponses.Count)
+                {
+                    finalResult = PersonalityCategoryScore.Introvert.ToString();
+                }
+                else if (extrovertResponses.Count == ambivertResponses.Count && extrovertResponses.Count > introvertResponses.Count)
+                {
+                    finalResult = PersonalityCategoryScore.Extrovert.ToString();
+                }
+                else if (extrovertResponses.Count == introvertResponses.Count)
+                {
+                    finalResult = PersonalityCategoryScore.Ambivert.ToString();
+                }
+                else
+                {
+                    finalResult = result.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+                }
+
+                return finalResult;
             }
             catch (ApplicationException)
             {
